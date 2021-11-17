@@ -5,6 +5,8 @@ def dimac_StartsWith_p(Input_Lines, name, info):
         
         Input_Lines = [x[0:-1] for x in Input_Lines]
         
+        Input_Lines = [[int(line) for line in lines] for lines in Input_Lines]
+        
         if info:
                 Number_of_Variables = Info[-2]
                 Number_of_Clauses   = Info[-1]
@@ -15,7 +17,8 @@ def dimac_StartsWith_p(Input_Lines, name, info):
                 
                 return Input_Lines 
         else:
-                return Input_Lines    
+                #print(Input_Lines)
+                return Input_Lines
     
 
 def dimac_Reader(input_file, name, info = False): #DIMACS Reader; returns lists of lists
@@ -26,13 +29,16 @@ def dimac_Reader(input_file, name, info = False): #DIMACS Reader; returns lists 
         #Start of information extraction
         if Input_Lines[0][0] == 'c':
                 Input_Lines =  Input_Lines[1:]
-                dimac_StartsWith_p(Input_Lines, name, info)
+                return dimac_StartsWith_p(Input_Lines, name, info)
             
         elif Input_Lines[0][0] == 'p':        
-                dimac_StartsWith_p(Input_Lines, name,info)
+                return dimac_StartsWith_p(Input_Lines, name,info)
         
         else:
                 Input_Lines = [x[0:-1] for x in Input_Lines]  
+                
+                Input_Lines = [[int(line) for line in lines] for lines in Input_Lines]
+                
                 if info:
                         print(f"Number of Clauses present in {name} file  : ", len(Input_Lines))
                         print(f"The first 5 clauses in {name} file :", Input_Lines[0:5])
@@ -62,6 +68,7 @@ def play_Strategy(strategy_number, dimac_list): #Strategy Number, (Rules + Puzzl
                 """
                    Code for Heuristic 3
                 """          
+     
     
 def main():
     
